@@ -1,0 +1,100 @@
+module Unknown exports (
+    Unknown,
+    UnknownObject,
+    UnknownArray,
+    Null,
+    Undefined,
+    typeof,
+    to_string,
+    to_int,
+    to_float,
+    to_bool,
+    to_array,
+    to_object,
+    to_null,
+    to_undefined,
+);
+
+import (std) Maybe (
+    Maybe(..),
+);
+import (std) StringMap (
+    StringMap,
+);
+
+
+type Unknown;
+
+typeof = typeof_impl;
+
+type Null;
+
+type Undefined;
+
+type alias UnknownObject = StringMap(Unknown);
+
+type alias UnknownArray = Array(Unknown);
+
+to_string = fn (dunno: Unknown): Maybe(String) -> to_string_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_int = fn (dunno: Unknown): Maybe(Int) -> to_int_impl(dunno, Just, Nothing);
+
+to_float = fn (dunno: Unknown): Maybe(Float) -> to_float_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_bool = fn (dunno: Unknown): Maybe(Bool) -> to_bool_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_array = fn (dunno: Unknown): Maybe(UnknownArray) -> to_array_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_object = fn (dunno: Unknown): Maybe(UnknownObject) -> to_object_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_null = fn (dunno: Unknown): Maybe(Null) -> to_null_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+to_undefined = fn (dunno: Unknown): Maybe(Undefined) -> to_undefined_impl(
+    dunno,
+    Just,
+    Nothing,
+);
+
+foreign typeof_impl: (Unknown) -> String;
+
+type alias ConversionFn(a) = (Unknown, (a) -> Maybe(a), Maybe(a)) -> Maybe(a);
+
+foreign to_string_impl: ConversionFn(String);
+
+foreign to_int_impl: ConversionFn(Int);
+
+foreign to_float_impl: ConversionFn(Float);
+
+foreign to_bool_impl: ConversionFn(Bool);
+
+foreign to_array_impl: ConversionFn(UnknownArray);
+
+foreign to_object_impl: ConversionFn(UnknownObject);
+
+foreign to_null_impl: ConversionFn(Null);
+
+foreign to_undefined_impl: ConversionFn(Undefined);

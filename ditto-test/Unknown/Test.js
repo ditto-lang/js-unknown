@@ -1,0 +1,11 @@
+export const unknown_int = 1234;
+export const unknown_string = "some string";
+export const unknown_float = 1234.4;
+export const unknown_true = true;
+export const unknown_false = false;
+export const unknown_empty_array = [];
+export const unknown_array = [1, "two", true];
+export const unknown_empty_object = {};
+export const unknown_object = { a: 2, b: 3, 4: null };
+export const unknown_null = null;
+export const unknown_undefined = undefined;
