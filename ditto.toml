@@ -4,5 +4,5 @@ dependencies = ["std"]
 
 [package-set.packages.std]
 github = { owner = "ditto-lang", repo = "std" }
-revision = "867969bd505be704f8bb45bb3de6d984beea4c38"
-sha256 = "18d7a27c3379977ac5e8ddec9a0f7390845028076d85affbe4aa5da2b82555ce"
+revision = "2b6ba19a726530f43c63a770c1742056b01a5fbf"
+sha256 = "dc6c3ddd4ac794a67bdd304d73b414be68e5f6d734f24a9bd0a7b4d133f4e864"
