@@ -9,6 +9,6 @@
     // compiled sources
     "dist/*",
     // foreign sources
-    "src/**/*.js"
+    "ditto-src/**/*.js"
   ]
 }
