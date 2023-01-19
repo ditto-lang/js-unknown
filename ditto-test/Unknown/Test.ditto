@@ -3,9 +3,7 @@ module Unknown.Test exports (
 )
 
 import (std) Array
-import (std) Effect (
-    VoidEffect,
-)
+import (std) Effect
 import (std) Maybe (
     Maybe(..),
 )
@@ -17,7 +15,7 @@ import Unknown (
 )
 
 
-type alias Args = { log_success: (String) -> VoidEffect }
+type alias Args = { log_success: (String) -> Effect(Unit) }
 
 type TestResult =
     | Success(String)
