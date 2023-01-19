@@ -1,27 +1,27 @@
 module Unknown.Test exports (
     main,
-);
+)
 
-import (std) Array;
+import (std) Array
 import (std) Effect (
     VoidEffect,
-);
+)
 import (std) Maybe (
     Maybe(..),
-);
-import (std) String;
-import (std) StringMap;
+)
+import (std) String
+import (std) StringMap
 
 import Unknown (
     Unknown,
-);
+)
 
 
-type alias Args = { log_success: (String) -> VoidEffect };
+type alias Args = { log_success: (String) -> VoidEffect }
 
 type TestResult =
     | Success(String)
-    | Error(String);
+    | Error(String)
 
 main = fn (args: Args): Effect(Bool) -> do {
     errs <- Effect.for_each(
@@ -39,7 +39,7 @@ main = fn (args: Args): Effect(Bool) -> do {
     return errs
     |> Array.filter(fn (err) -> err)
     |> Array.is_empty
-};
+}
 
 tests: Array(TestResult) = Array.concat(
     [
@@ -53,7 +53,7 @@ tests: Array(TestResult) = Array.concat(
         unknown_to_null_tests,
         unknown_to_undefined_tests,
     ],
-);
+)
 
 typeof_tests: Array(TestResult) =
     let
@@ -61,7 +61,7 @@ typeof_tests: Array(TestResult) =
             if String.is_eq(got, want) then
                 Success("Unknown.typeof: noice")
             else
-                Error("Unknown.typeof: huh");
+                Error("Unknown.typeof: huh")
     in
     [
         assert(Unknown.typeof(unknown_string), "string"),
@@ -75,7 +75,7 @@ typeof_tests: Array(TestResult) =
         assert(Unknown.typeof(unknown_object), "object"),
         assert(Unknown.typeof(unknown_null), "object"),
         assert(Unknown.typeof(unknown_undefined), "undefined"),
-    ];
+    ]
 
 unknown_to_string_tests: Array(TestResult) =
     let
@@ -83,13 +83,13 @@ unknown_to_string_tests: Array(TestResult) =
             match Unknown.to_string(dunno) with
             | Just(_) -> Success("Unknown.to_string: noice")
             | Nothing -> Error("Unknown.to_string: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_string(dunno) with
             | Just(_) -> Error("Unknown.to_string: huh")
             | Nothing -> Success("Unknown.to_string: noice")
-            end;
+            end
     in
     [
         test_yeh(unknown_string),
@@ -103,7 +103,7 @@ unknown_to_string_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_nah(unknown_null),
         test_nah(unknown_undefined),
-    ];
+    ]
 
 unknown_to_int_tests: Array(TestResult) =
     let
@@ -111,13 +111,13 @@ unknown_to_int_tests: Array(TestResult) =
             match Unknown.to_int(dunno) with
             | Just(_) -> Success("Unknown.to_int: noice")
             | Nothing -> Error("Unknown.to_int: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_int(dunno) with
             | Just(_) -> Error("Unknown.to_int: huh")
             | Nothing -> Success("Unknown.to_int: noice")
-            end;
+            end
     in
     [
         test_yeh(unknown_int),
@@ -131,7 +131,7 @@ unknown_to_int_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_nah(unknown_null),
         test_nah(unknown_undefined),
-    ];
+    ]
 
 unknown_to_float_tests: Array(TestResult) =
     let
@@ -139,13 +139,13 @@ unknown_to_float_tests: Array(TestResult) =
             match Unknown.to_float(dunno) with
             | Just(_) -> Success("Unknown.to_float: noice")
             | Nothing -> Error("Unknown.to_float: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_float(dunno) with
             | Just(_) -> Error("Unknown.to_float: huh")
             | Nothing -> Success("Unknown.to_float: noice")
-            end;
+            end
     in
     [
         test_yeh(unknown_int),
@@ -159,7 +159,7 @@ unknown_to_float_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_nah(unknown_null),
         test_nah(unknown_undefined),
-    ];
+    ]
 
 unknown_to_bool_tests: Array(TestResult) =
     let
@@ -167,13 +167,13 @@ unknown_to_bool_tests: Array(TestResult) =
             match Unknown.to_bool(dunno) with
             | Just(_) -> Success("Unknown.to_bool: noice")
             | Nothing -> Error("Unknown.to_bool: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_bool(dunno) with
             | Just(_) -> Error("Unknown.to_bool: huh")
             | Nothing -> Success("Unknown.to_bool: noice")
-            end;
+            end
     in
     [
         test_nah(unknown_int),
@@ -187,7 +187,7 @@ unknown_to_bool_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_nah(unknown_null),
         test_nah(unknown_undefined),
-    ];
+    ]
 
 unknown_to_array_tests: Array(TestResult) =
     let
@@ -195,13 +195,13 @@ unknown_to_array_tests: Array(TestResult) =
             match Unknown.to_array(dunno) with
             | Just(_) -> Success("Unknown.to_array: noice")
             | Nothing -> Error("Unknown.to_array: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_array(dunno) with
             | Just(_) -> Error("Unknown.to_array: huh")
             | Nothing -> Success("Unknown.to_array: noice")
-            end;
+            end
     in
     [
         test_nah(unknown_int),
@@ -249,13 +249,13 @@ unknown_to_array_tests: Array(TestResult) =
                             Array.get(array, 2)
                             |> Maybe.and_then(Unknown.to_bool),
                         ),
-                );
+                )
         in
         match result with
         | Just(_) -> Success("Unknown.to_object: noice")
         | Nothing -> Error("Unknown.to_object: oops")
         end,
-    ];
+    ]
 
 unknown_to_object_tests: Array(TestResult) =
     let
@@ -263,13 +263,13 @@ unknown_to_object_tests: Array(TestResult) =
             match Unknown.to_object(dunno) with
             | Just(_) -> Success("Unknown.to_object: noice")
             | Nothing -> Error("Unknown.to_object: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_object(dunno) with
             | Just(_) -> Error("Unknown.to_object: huh")
             | Nothing -> Success("Unknown.to_object: noice")
-            end;
+            end
     in
     [
         test_nah(unknown_int),
@@ -321,13 +321,13 @@ unknown_to_object_tests: Array(TestResult) =
                             |> Maybe.and_then(Unknown.to_null)
                             |> Maybe.map(fn (_null) -> unit),
                         ),
-                );
+                )
         in
         match result with
         | Just(_) -> Success("Unknown.to_object: noice")
         | Nothing -> Error("Unknown.to_object: oops")
         end,
-    ];
+    ]
 
 unknown_to_null_tests: Array(TestResult) =
     let
@@ -335,13 +335,13 @@ unknown_to_null_tests: Array(TestResult) =
             match Unknown.to_null(dunno) with
             | Just(_) -> Success("Unknown.to_null: noice")
             | Nothing -> Error("Unknown.to_null: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_null(dunno) with
             | Just(_) -> Error("Unknown.to_null: huh")
             | Nothing -> Success("Unknown.to_null: noice")
-            end;
+            end
     in
     [
         test_nah(unknown_string),
@@ -355,7 +355,7 @@ unknown_to_null_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_yeh(unknown_null),
         test_nah(unknown_undefined),
-    ];
+    ]
 
 unknown_to_undefined_tests: Array(TestResult) =
     let
@@ -363,13 +363,13 @@ unknown_to_undefined_tests: Array(TestResult) =
             match Unknown.to_undefined(dunno) with
             | Just(_) -> Success("Unknown.to_undefined: noice")
             | Nothing -> Error("Unknown.to_undefined: oops")
-            end;
+            end
 
         test_nah = fn (dunno: Unknown): TestResult ->
             match Unknown.to_undefined(dunno) with
             | Just(_) -> Error("Unknown.to_undefined: huh")
             | Nothing -> Success("Unknown.to_undefined: noice")
-            end;
+            end
     in
     [
         test_nah(unknown_string),
@@ -383,26 +383,26 @@ unknown_to_undefined_tests: Array(TestResult) =
         test_nah(unknown_object),
         test_nah(unknown_null),
         test_yeh(unknown_undefined),
-    ];
+    ]
 
-foreign unknown_string: Unknown;
+foreign unknown_string: Unknown
 
-foreign unknown_int: Unknown;
+foreign unknown_int: Unknown
 
-foreign unknown_float: Unknown;
+foreign unknown_float: Unknown
 
-foreign unknown_true: Unknown;
+foreign unknown_true: Unknown
 
-foreign unknown_false: Unknown;
+foreign unknown_false: Unknown
 
-foreign unknown_empty_array: Unknown;
+foreign unknown_empty_array: Unknown
 
-foreign unknown_array: Unknown;
+foreign unknown_array: Unknown
 
-foreign unknown_empty_object: Unknown;
+foreign unknown_empty_object: Unknown
 
-foreign unknown_object: Unknown;
+foreign unknown_object: Unknown
 
-foreign unknown_null: Unknown;
+foreign unknown_null: Unknown
 
-foreign unknown_undefined: Unknown;
+foreign unknown_undefined: Unknown
