@@ -4,10 +4,5 @@ dependencies = ["std"]
 ditto-version = ">=0.0.3"
 
 [[package-set.extends]]
-url = "https://raw.githubusercontent.com/ditto-lang/package-sets/63a9aeba5035ed57385801ec8f63208477c84255/packages.toml"
-sha256 = "638d99c65aed99d35c7dbe61050925949164107865bedb3c49a2ba27cae6ad8a"
-
-[package-set.packages.std]
-github = { owner = "ditto-lang", repo = "std" }
-revision = "158c69e6d4abfae03cf4034b3b4e2a61eed891f4"
-sha256 = "3a5832c9df4e0b5aefe1a3e3ddc0850ab0bdc568a2b3dc8a6a53d94c71a19f11"
+url = "https://raw.githubusercontent.com/ditto-lang/package-sets/da13a39180248691fa30505b5e0172e9e24c3200/packages.toml"
+sha256 = "ec50b45563d101d94a76792791b089739175a1211b029e0f642f8c79b45b3498"
