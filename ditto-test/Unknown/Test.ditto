@@ -229,7 +229,7 @@ unknown_to_array_tests: Array(TestResult) =
                 |> Maybe.and_then(
                     fn (array) ->
                         Just(
-                            fn (x) -> fn (y) -> fn (z) -> { 
+                            fn (x) -> fn (y) -> fn (z) -> {
                                 x = x,
                                 y = y,
                                 z = z,
@@ -300,7 +300,7 @@ unknown_to_object_tests: Array(TestResult) =
                 |> Maybe.and_then(
                     fn (obj) ->
                         Just(
-                            fn (x) -> fn (y) -> fn (z) -> { 
+                            fn (x) -> fn (y) -> fn (z) -> {
                                 x = x,
                                 y = y,
                                 z = z,
